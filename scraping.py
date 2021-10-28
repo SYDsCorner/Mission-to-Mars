@@ -10,7 +10,10 @@ import datetime as dt
 executable_path = {'executable_path': ChromeDriverManager().install()}
 browser = Browser('chrome', **executable_path, headless=False)
 
-# -- connect to Mongo and establish communication between our code and the database
+# -- Connect to Mongo and establish communication between our code and the database -- #
+# 1. Initialize the browser.
+# 2. Create a data dictionary.
+# 3. End the WebDriver and return the scraped data.
 
 def scrape_all():
     # Initiate headless driver for deployment
@@ -112,6 +115,7 @@ def mars_facts():
     return df.to_html(classes="table table-striped")
 
 
+# Tell Flask that the script is complete and ready for action
 if __name__ == "__main__":
 
     # If running as script, print scraped data
