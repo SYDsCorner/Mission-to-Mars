@@ -28,6 +28,7 @@ def scrape_all():
         "news_paragraph": news_paragraph,
         "featured_image": featured_image(browser),
         "facts": mars_facts(),
+        "hemispheres": hemisphere(browser),
         "last_modified": dt.datetime.now()
     }
 
@@ -115,9 +116,63 @@ def mars_facts():
     return df.to_html(classes="table table-striped")
 
 
+# -- Hemisphere Data -- 
+
+def hemisphere(browser):
+
+    # Visit the URL 
+    url = 'https://marshemispheres.com/'
+    browser.visit(url)
+
+    # Create a list to hold the images and titles.
+    hemisphere_image_urls = []
+
+    # Write code to retrieve the image urls and titles for each hemisphere.
+    html = browser.html
+    mars_hemi_soup = soup(html, 'html.parser')
+
+    try:
+        products = mars_hemi_soup.find_all('div', class_='item')
+    
+        for i in products:
+            
+            # Create an empty dictionary
+            hemispheres = {}
+            
+            # Find link to each hemiphere
+            hemi_url = i.find('a', class_='itemLink product-item')['href']
+            browser.visit(url+hemi_url)
+            
+            # Parse each hemiphere
+            html = browser.html
+            hemi_soup = soup(html, 'html.parser')
+            
+            # Find the title
+            title = hemi_soup.find('h2', class_='title').get_text()
+            # Find the image urls
+            img_download = hemi_soup.find('div', class_='downloads')
+            img_url = img_download.find('a')['href']
+            
+            # Save the hemisphere image title and the image URL to the 'hemisphere' dictionary
+            hemispheres = {'title': title, 
+                        'img url': url+img_url}
+            
+            # Append the 'hemispheres' dictionary to the 'hemisphere_image_urls' list
+            hemisphere_image_urls.append(hemispheres)
+            
+            # Navigate back to the beginning to get the next hemisphere
+            browser.back()
+
+    except AttributeError:
+        return None, None
+
+    return hemisphere_image_urls
+
+
 # Tell Flask that the script is complete and ready for action
 if __name__ == "__main__":
 
     # If running as script, print scraped data
     print(scrape_all())
+
 
