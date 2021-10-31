@@ -132,15 +132,15 @@ def hemisphere(browser):
     mars_hemi_soup = soup(html, 'html.parser')
 
     try:
-        products = mars_hemi_soup.find_all('div', class_='item')
+        items = mars_hemi_soup.find_all('div', class_='item')
     
-        for i in products:
+        for item in items:
             
             # Create an empty dictionary
             hemispheres = {}
             
             # Find link to each hemiphere
-            hemi_url = i.find('a', class_='itemLink product-item')['href']
+            hemi_url = item.find('a', class_='itemLink product-item')['href']
             browser.visit(url+hemi_url)
             
             # Parse each hemiphere
@@ -154,8 +154,9 @@ def hemisphere(browser):
             img_url = img_download.find('a')['href']
             
             # Save the hemisphere image title and the image URL to the 'hemisphere' dictionary
-            hemispheres = {'title': title, 
-                        'img url': url+img_url}
+            hemispheres = { 
+                    'title': title, 
+                    'img_url': url+img_url}
             
             # Append the 'hemispheres' dictionary to the 'hemisphere_image_urls' list
             hemisphere_image_urls.append(hemispheres)
