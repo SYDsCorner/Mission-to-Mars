@@ -15,7 +15,7 @@ The purpose of this analysis is to adjust the current web app to include all fou
    - Visual Studio Code 1.61.2
    - Python 3.8.8
 
-- Data sourced: 
+- Data sources: 
    - [NASA Mars News Site](https://redplanetscience.com/)
    - [JPL Space](https://spaceimages-mars.com)
    - [Mars Facts](https://galaxyfacts-mars.com)
