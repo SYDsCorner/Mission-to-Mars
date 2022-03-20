@@ -15,6 +15,7 @@ The purpose of this analysis is to adjust the current web app to include all fou
    - Jupyter Notebooks 6.4.3
    - Visual Studio Code 1.61.2
    - Python 3.8.8
+   - HTML/CSS
 
 - Data sources: 
    - [NASA Mars News Site](https://redplanetscience.com/)
